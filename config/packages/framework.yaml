@@ -15,3 +15,9 @@ framework:
     #fragments: true
     php_errors:
         log: true
+    http_client:
+        scoped_clients:
+            slots_api_client:
+                #parametrize in .env!
+                base_uri: 'http://cryptic-cove-05648.herokuapp.com/api/'
+                auth_basic: 'docplanner:docplanner'

@@ -9,7 +9,7 @@ use App\Entity\Slot;
 final class SlotsCollection
 {
     /** @var Slot[] */
-    private array $slots;
+    private array $slots = [];
 
     public function addSlot(Slot $slot): void
     {
