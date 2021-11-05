@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests\Service;
@@ -18,9 +19,7 @@ abstract class AbstractSlotSorterTest extends TestCase
             $slot = (new Slot())
                 ->setDoctorId(1)
                 ->setDateFrom($date);
-
             $date->modify(sprintf('+%d minutes', $offsets[random_int(0, 2)]));
-
             $slot->setDateTo($date);
             $slotsCollection->addSlot($slot);
         }

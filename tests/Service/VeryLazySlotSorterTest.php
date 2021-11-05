@@ -20,7 +20,7 @@ class VeryLazySlotSorterTest extends AbstractSlotSorterTest
 
         $misplacedSlots = 0;
         foreach ($slotsArray as $i => $item) {
-            if($item->getId() !== $sortedSlotsArray->getSlots()[$i]->getId()) {
+            if ($item->getId() !== $sortedSlotsArray->getSlots()[$i]->getId()) {
                 $misplacedSlots++;
             }
         }

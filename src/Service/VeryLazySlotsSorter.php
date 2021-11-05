@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service;
@@ -9,7 +10,6 @@ use App\ValueObject\SlotsCollection;
 final class VeryLazySlotsSorter implements SlotsSorter
 {
     private int $activeness;
-
     public function __construct(int $activeness)
     {
         $this->activeness = $activeness;
