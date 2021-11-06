@@ -4,26 +4,27 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+use App\Exception\SlotFetcher\SlotsFetchingException;
+use App\Repository\SlotPersister;
+use Psr\Log\LoggerInterface;
 
 class SlotsFetcher
 {
-    private HttpClientInterface $slotsApiClient;
     private DoctorFetchingClient $doctorFetchingClient;
     private SlotFetchingClient $slotFetchingClient;
-    private EntityManagerInterface $entityManager;
+    private SlotPersister $slotPersister;
+    private LoggerInterface $logger;
 
     public function __construct(
-        HttpClientInterface $slotsApiClient,
+        LoggerInterface $logger,
         DoctorFetchingClient $doctorFetchingClient,
         SlotFetchingClient $slotFetchingClient,
-        EntityManagerInterface $entityManager
+        SlotPersister $slotPersister
     ) {
-        $this->slotsApiClient = $slotsApiClient;
         $this->doctorFetchingClient = $doctorFetchingClient;
         $this->slotFetchingClient = $slotFetchingClient;
-        $this->entityManager = $entityManager;
+        $this->slotPersister = $slotPersister;
+        $this->logger = $logger;
     }
 
     public function fetch(): void
@@ -31,11 +32,12 @@ class SlotsFetcher
         $doctorIds = $this->doctorFetchingClient->getDoctorIds();
 
         foreach ($doctorIds as $doctorId) {
-            $doctorSlots = $this->slotFetchingClient->fetchSlotsByDoctorId($doctorId);
-            foreach ($doctorSlots->getSlots() as $slot) {
-                $this->entityManager->persist($slot);
+            try {
+                $slots = $this->slotFetchingClient->getSlotsByDoctorId($doctorId);
+            } catch (SlotsFetchingException $exception) {
+                $this->logger->error($exception->getMessage());
             }
-            $this->entityManager->flush();
+            $this->slotPersister->persistCollection($slots);
         }
     }
 }

@@ -18,12 +18,12 @@ class DoctorFetchingClient
 
     public function getDoctorIds(): array
     {
-        $basicData = $this->slotsApiClient->request(
+        $response = $this->slotsApiClient->request(
             Request::METHOD_GET,
             'doctors'
         );
 
-        $doctors = json_decode($basicData->getContent(), true);
+        $doctors = json_decode($response->getContent(), true);
 
         return array_column($doctors, 'id');
     }

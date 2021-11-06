@@ -21,17 +21,17 @@ class Slot
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateFrom;
+    private \DateTimeInterface $dateFrom;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateTo;
+    private \DateTimeInterface $dateTo;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $doctorId;
+    private int $doctorId;
 
     public function getId(): ?int
     {
@@ -43,11 +43,9 @@ class Slot
         return $this->dateFrom;
     }
 
-    public function setDateFrom(\DateTimeInterface $dateFrom): self
+    public function setDateFrom(\DateTimeInterface $dateFrom): void
     {
         $this->dateFrom = $dateFrom;
-
-        return $this;
     }
 
     public function getDateTo(): ?\DateTimeInterface
@@ -55,11 +53,9 @@ class Slot
         return $this->dateTo;
     }
 
-    public function setDateTo(\DateTimeInterface $dateTo): self
+    public function setDateTo(\DateTimeInterface $dateTo): void
     {
         $this->dateTo = $dateTo;
-
-        return $this;
     }
 
     public function getDoctorId(): ?int
@@ -67,10 +63,8 @@ class Slot
         return $this->doctorId;
     }
 
-    public function setDoctorId(int $doctorId): self
+    public function setDoctorId(int $doctorId): void
     {
         $this->doctorId = $doctorId;
-
-        return $this;
     }
 }
