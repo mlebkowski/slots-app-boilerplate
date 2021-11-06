@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Integration\Service;
+namespace App\Tests\Integration\Service\SlotFetching;
 
 use App\Entity\Slot;
 use App\Repository\SlotPersister;
 use App\Repository\SlotRepository;
-use App\Service\DoctorFetchingClient;
-use App\Service\SlotFetchingClient;
-use App\Service\SlotsFetcher;
+use App\Service\SlotFetching\DoctorFetchingClient;
+use App\Service\SlotFetching\SlotFetchingClient;
+use App\Service\SlotFetching\SlotsFetcher;
 use Doctrine\ORM\EntityManagerInterface;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -79,6 +79,7 @@ class SlotsFetcherTest extends KernelTestCase
         //assert
         self::assertEquals(2, count($this->slotsRepository->findAll()));
         self::assertEquals(0, count($this->slotsRepository->findBy(['doctorId' => 2])));
+        // TODO: more strict check of error message
         $this->logger->error(Argument::cetera())->shouldHaveBeenCalled();
     }
 

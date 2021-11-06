@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Service\SlotFetching;
 
 use App\Entity\Slot;
 use App\Exception\SlotFetcher\SlotsFetchingException;
@@ -29,6 +29,7 @@ class SlotFetchingClient
 
         $slots = new SlotsCollection();
         foreach ($rawSlots as $slotArray) {
+            // TODO: move creation of slots into some kind of factory, which also take care about validation of Slots
             $slot = new Slot();
             $slot->setDateFrom(new \DateTimeImmutable($slotArray['start']));
             $slot->setDateTo(new \DateTimeImmutable($slotArray['end']));

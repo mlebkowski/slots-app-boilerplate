@@ -7,6 +7,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * TODO: add key containing all columns, so the identical slots won't duplicate
+ *
  * @ORM\Entity(repositoryClass="App\Repository\SlotRepository")
  */
 class Slot
@@ -15,6 +17,8 @@ class Slot
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
+     * TODO: Refactor to UUID
      */
     private $id;
 
