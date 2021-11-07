@@ -22,6 +22,6 @@ class ByDurationDescendingSlotSorter implements SlotsSorter
 
     private function calculateDuration(Slot $slot): int
     {
-        return $slot->getDateTo()->getTimestamp() - $slot->getDateFrom()->getTimestamp();
+        return abs($slot->getDateTo()->getTimestamp() - $slot->getDateFrom()->getTimestamp());
     }
 }

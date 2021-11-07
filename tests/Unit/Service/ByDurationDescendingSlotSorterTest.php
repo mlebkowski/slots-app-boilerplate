@@ -46,7 +46,7 @@ class ByDurationDescendingSlotSorterTest extends TestCase
 
     private static function calculateDuration(Slot $slot): int
     {
-        return $slot->getDateTo()->getTimestamp() - $slot->getDateFrom()->getTimestamp();
+        return abs($slot->getDateTo()->getTimestamp() - $slot->getDateFrom()->getTimestamp());
     }
 
     /**
@@ -55,9 +55,9 @@ class ByDurationDescendingSlotSorterTest extends TestCase
     public function slotDurationsProvider(): array
     {
         return [
-            [['3 hours', '1 hour', '2 hours', '5 hours', '6 hours']],
-            [['3 hours', '2 days', '5 seconds', '0 seconds', '7 years']],
-            [['3 hours', '3 hours', '3 hours']]
+            [['+3 hours', '+1 hour', '+2 hours', '+5 hours', '+6 hours', '-20 minutes']], //last for check when data not valid
+            [['+3 hours', '+2 days', '+5 seconds', '+0 seconds', '+7 years']],
+            [['+3 hours', '+3 hours', '+3 hours']]
         ];
     }
 
@@ -68,7 +68,7 @@ class ByDurationDescendingSlotSorterTest extends TestCase
             $slot = new Slot();
             $start = new \DateTimeImmutable(self::BASE_DATE);
             $slot->setDateFrom($start);
-            $slot->setDateTo($start->modify('+'.$duration));
+            $slot->setDateTo($start->modify($duration));
             $slotCollection->addSlot($slot);
         }
         return $slotCollection;
