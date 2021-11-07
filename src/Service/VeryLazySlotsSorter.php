@@ -10,9 +10,15 @@ use App\ValueObject\SlotsCollection;
 final class VeryLazySlotsSorter implements SlotsSorter
 {
     private int $activeness;
+
     public function __construct(int $activeness)
     {
         $this->activeness = $activeness;
+    }
+
+    public function getName(): string
+    {
+        return 'veryLazy';
     }
 
     public function sort(SlotsCollection $slotsCollection): SlotsCollection

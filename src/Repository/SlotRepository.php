@@ -20,4 +20,17 @@ class SlotRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Slot::class);
     }
+
+    public function findInTimeframe(\DateTimeInterface $dateFrom, \DateTimeInterface $dateTo): array
+    {
+        $queryBuilder = $this->createQueryBuilder('slot')
+            ->select()
+            ->from('App:Slot', 's')
+            ->where('slot.dateFrom >= :from')
+            ->andWhere('slot.dateTo <= :to')
+            ->setParameter('from', $dateFrom)
+            ->setParameter('to', $dateTo);
+
+        return $queryBuilder->getQuery()->execute();
+    }
 }

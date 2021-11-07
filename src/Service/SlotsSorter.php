@@ -9,4 +9,6 @@ use App\ValueObject\SlotsCollection;
 interface SlotsSorter
 {
     public function sort(SlotsCollection $slotsCollection): SlotsCollection;
+
+    public function getName(): string;
 }
