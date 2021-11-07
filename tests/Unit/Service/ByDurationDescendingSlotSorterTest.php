@@ -18,10 +18,14 @@ class ByDurationDescendingSlotSorterTest extends TestCase
      */
     public function testDurationIsDescending(array $durations): void
     {
+        //arrange
         $collection = $this->getCollectionOfSlotsWithDuration($durations);
         $sorter = new ByDurationDescendingSlotSorter();
+
+        //act
         $sorted = $sorter->sort($collection);
 
+        //assert
         self::assertSlotsOrderedFromLongestToShortest($sorted);
     }
 
