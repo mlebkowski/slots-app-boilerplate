@@ -20,4 +20,9 @@ final class SlotsCollection
     {
         return $this->slots;
     }
+
+    public function setSlots(array $slots): void
+    {
+        $this->slots = $slots;
+    }
 }
