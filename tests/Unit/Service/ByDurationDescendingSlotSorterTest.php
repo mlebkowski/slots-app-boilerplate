@@ -37,7 +37,7 @@ class ByDurationDescendingSlotSorterTest extends TestCase
                 $last = $slot;
                 continue;
             }
-            if (self::calculateDuration($slot) < self::calculateDuration($last)) {
+            if (self::calculateDuration($slot) > self::calculateDuration($last)) {
                 self::fail('Order is not matching in at least one case in set');
             }
         }

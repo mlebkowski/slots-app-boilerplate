@@ -7,13 +7,18 @@ namespace App\Service;
 use App\Entity\Slot;
 use App\ValueObject\SlotsCollection;
 
-class ByDurationDescendingSlotSorter implements SlotsSorter
+final class ByDurationDescendingSlotSorter implements SlotsSorter
 {
+    public function getName(): string
+    {
+        return 'durationDescending';
+    }
+
     public function sort(SlotsCollection $slotsCollection): SlotsCollection
     {
         $slots = $slotsCollection->getSlots();
         usort($slots, function (Slot $item1, Slot $item2) {
-            return $this->calculateDuration($item1) <=> $this->calculateDuration($item2);
+            return $this->calculateDuration($item2) <=> $this->calculateDuration($item1);
         });
         $slotsCollection->setSlots($slots);
 
