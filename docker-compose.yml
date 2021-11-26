@@ -1,6 +1,7 @@
-version: '3.8'
+version: "3.3"
 services:
-  recruitment-app:
+  application:
+    container_name: application
     env_file:
       - .env
     build:
@@ -9,4 +10,4 @@ services:
     volumes:
       - ./:/app
     ports:
-      - 3160:3160
+      - "3160:3160"

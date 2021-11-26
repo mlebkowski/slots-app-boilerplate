@@ -1,0 +1,8 @@
+parameters:
+    level: 9
+    paths:
+        - config
+        - migrations
+        - public
+        - src
+        - tests
