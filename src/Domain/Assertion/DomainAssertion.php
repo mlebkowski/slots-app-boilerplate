@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Enraged\Domain\Assertion;
 
-class DomainAssertion
+use Assert\Assertion;
+use Enraged\Domain\Exception\DomainInvalidAssertionException;
+
+class DomainAssertion extends Assertion
 {
     /**
      * Exception to throw when an assertion failed.
      *
      * @var string
      */
-    protected static $exceptionClass = \Enraged\Domain\Exception\DomainInvalidAssertionException::class;
+    protected static $exceptionClass = DomainInvalidAssertionException::class;
 }
