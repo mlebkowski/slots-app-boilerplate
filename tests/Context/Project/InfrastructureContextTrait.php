@@ -6,8 +6,19 @@ namespace Enraged\Tests\Context\Project;
 
 trait InfrastructureContextTrait
 {
-    public function infrastructure() : InfrastructureContext
+    protected function setUp() : void
     {
-        return new InfrastructureContext($this->getContainer());
+        parent::setUp();
+        if (method_exists($this, $method = 'setUpDatabase')) {
+            $this->{$method}();
+        }
+    }
+
+    protected function tearDown() : void
+    {
+        parent::tearDown();
+        if (method_exists($this, $method = 'tearDownDatabase')) {
+            $this->{$method}();
+        }
     }
 }

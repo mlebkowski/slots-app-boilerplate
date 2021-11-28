@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Enraged\Tests\Functional;
 
-class FunctionalWebTestCase extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+class FunctionalWebTestCase extends WebTestCase
 {
 }

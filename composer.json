@@ -23,6 +23,7 @@
         "symfony/http-client": "^5.3",
         "symfony/intl": "^5.3",
         "symfony/mailer": "^5.3",
+        "symfony/messenger": "^5.3",
         "symfony/monolog-bundle": "^3.1",
         "symfony/notifier": "^5.3",
         "symfony/process": "^5.3",
@@ -94,13 +95,17 @@
         ],
         "cache:clear": [
             "@cache:clear:dev",
-            "@cache:clear:test"
+            "@cache:clear:test",
+            "@cache:clear:prod"
         ],
         "cache:clear:dev": [
             "bin/console cache:clear --env=dev"
         ],
         "cache:clear:test": [
             "bin/console cache:clear --env=test"
+        ],
+        "cache:clear:prod": [
+            "bin/console cache:clear --env=prod"
         ],
         "quality:check": [
             "@quality:cs:check",

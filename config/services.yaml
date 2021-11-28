@@ -21,6 +21,19 @@ services:
         resource: '../src/Enraged/Interactions/Web/Controller'
         tags: ['controller.service_arguments']
 
+    # INFRASTRUCTURE/CQRS
+    Enraged\Application\CommandHandler\:
+        resource: '../src/Enraged/Application/CommandHandler/'
+        tags: [{ name: 'messenger.message_handler', bus: 'command.bus' }]
+
+    Enraged\Application\QueryHandler\:
+        resource: '../src/Enraged/Application/QueryHandler/'
+        tags: [{ name: 'messenger.message_handler', bus: 'query.bus' }]
+
+    Enraged\Application\EventHandler\:
+        resource: '../src/Enraged/Application/EventHandler/'
+        tags: [{ name: 'messenger.message_handler', bus: 'event.bus' }]
+
     # INFRASTRUCTURE/HTTP
     Symfony\Component\HttpClient\TraceableHttpClient: ~
     Enraged\Infrastructure\HTTP\Client\HttpClientInterface:

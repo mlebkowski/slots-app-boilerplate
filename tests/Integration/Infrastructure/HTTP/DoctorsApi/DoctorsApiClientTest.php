@@ -13,18 +13,18 @@ use Enraged\Infrastructure\HTTP\DoctorsApi\Filter\ListDoctorsApiRequestFilter;
 use Enraged\Infrastructure\HTTP\DoctorsApi\Filter\ListDoctorTimeSlotsApiRequestFilter;
 use Enraged\Infrastructure\HTTP\DoctorsApi\Model\DoctorModel;
 use Enraged\Infrastructure\HTTP\DoctorsApi\Model\DoctorTimeSlotModel;
-use Enraged\Tests\Context\Project\InfrastructureContextTrait;
+use Enraged\Tests\Context\Project\Infrastructure\HttpContextTrait;
 use Enraged\Tests\Integration\IntegrationTestCase;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Response;
 
 class DoctorsApiClientTest extends IntegrationTestCase
 {
-    use InfrastructureContextTrait;
+    use HttpContextTrait;
 
     public function test_listing_doctors()
     {
-        $this->infrastructure()->httpClient()->setResponse(
+        $this->httpClient()->setResponse(
             new InMemoryHttpClientResponse(
                 Response::HTTP_OK,
                 [
@@ -60,7 +60,7 @@ class DoctorsApiClientTest extends IntegrationTestCase
         );
 
         $subject = new DoctorsApiClient(
-            $this->infrastructure()->httpClient(),
+            $this->httpClient(),
             $host,
             $username,
             $password
@@ -83,7 +83,7 @@ class DoctorsApiClientTest extends IntegrationTestCase
 
     public function test_listing_doctor_time_slots()
     {
-        $this->infrastructure()->httpClient()->setResponse(
+        $this->httpClient()->setResponse(
             new InMemoryHttpClientResponse(
                 Response::HTTP_OK,
                 [
@@ -123,7 +123,7 @@ class DoctorsApiClientTest extends IntegrationTestCase
         );
 
         $subject = new DoctorsApiClient(
-            $this->infrastructure()->httpClient(),
+            $this->httpClient(),
             $host,
             $username,
             $password
