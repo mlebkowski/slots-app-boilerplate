@@ -6,3 +6,31 @@ parameters:
         - public
         - src
         - tests
+    ignoreErrors:
+        -
+           message: '#Property [a-zA-Z\\_]+::\$[a-zA-Z\\_]+ type has no value type specified in iterable type array\.#'
+           paths:
+               - src/Enraged/Infrastructure/HTTP/Client/InMemoryHttpClientResponse.php
+        -
+           message: '#Method [a-zA-Z\\_]+::[a-zA-Z_]+\(\) has parameter [\$a-zA-Z_]+ with no value type specified in iterable type array\.#'
+           paths:
+               - src/Enraged/Infrastructure/HTTP/Client/HttpClient.php
+               - src/Enraged/Infrastructure/HTTP/Client/InMemoryHttpClient.php
+               - src/Enraged/Infrastructure/HTTP/Client/InMemoryHttpClientInterface.php
+               - src/Enraged/Infrastructure/HTTP/Client/InMemoryHttpClientResponse.php
+        -
+           message: '#Method [a-zA-Z\\_]+::[a-zA-Z_]+\(\) return type has no value type specified in iterable type array\.#'
+           paths:
+               - src/Enraged/Infrastructure/HTTP/Client/InMemoryHttpClientResponse.php
+               - src/Enraged/Infrastructure/HTTP/DoctorsApi/Response
+        -
+           message: '#PHPDoc tag @return with type object is incompatible with native type array\.#'
+           paths:
+               - src/Enraged/Infrastructure/HTTP/DoctorsApi/Response
+        -
+           message: '#Method [a-zA-Z\\_]+::[a-zA-Z_]+\(\) has no return type specified\.#'
+           paths:
+               - src/Enraged/Infrastructure/HTTP/Client/InMemoryHttpClient.php
+               - tests/Unit
+               - tests/Integration
+               - tests/Functional

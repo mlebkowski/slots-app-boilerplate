@@ -1,0 +1,9 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Enraged\Infrastructure\Exception;
+
+class InfrastructureHttpBadRequestException extends InfrastructureHttpException
+{
+}

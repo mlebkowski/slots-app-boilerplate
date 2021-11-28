@@ -10,7 +10,7 @@ use Enraged\Tests\Unit\UnitTestCase;
 
 class ApplicationAssertionTest extends UnitTestCase
 {
-    public function test_throws_correct_exception() : void
+    public function test_throws_correct_exception()
     {
         $this->expectException(ApplicationInvalidAssertionException::class);
         ApplicationAssertion::notEmpty([]);

@@ -64,7 +64,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Enraged\\": "src/"
+            "Enraged\\": "src/Enraged/"
         }
     },
     "autoload-dev": {
@@ -92,6 +92,16 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
+        "cache:clear": [
+            "@cache:clear:dev",
+            "@cache:clear:test"
+        ],
+        "cache:clear:dev": [
+            "bin/console cache:clear --env=dev"
+        ],
+        "cache:clear:test": [
+            "bin/console cache:clear --env=test"
+        ],
         "quality:check": [
             "@quality:cs:check",
             "@quality:stan:check",
@@ -110,7 +120,7 @@
             "vendor/bin/phpstan analyse -c phpstan.neon src tests"
         ],
         "quality:psalm:check": [
-            "vendor/bin/psalm"
+            "vendor/bin/psalm --no-cache"
         ],
         "test": [
             "@quality:check",
