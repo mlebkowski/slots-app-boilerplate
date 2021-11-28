@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Enraged\Application\Command;
 
-class LogMessageCommand
+class LogToStdOutMessageCommand
 {
     protected string $message;
 

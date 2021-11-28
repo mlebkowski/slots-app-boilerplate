@@ -21,7 +21,11 @@ services:
         resource: '../src/Enraged/Interactions/Web/Controller'
         tags: ['controller.service_arguments']
 
-    # INFRASTRUCTURE/CQRS
+    # INFRASTRUCTURE/CALENDAR
+    Enraged\Infrastructure\Calendar\CalendarInterface:
+        class: 'Enraged\Infrastructure\Calendar\Calendar'
+
+    # INFRASTRUCTURE/BUS
     Enraged\Application\CommandHandler\:
         resource: '../src/Enraged/Application/CommandHandler/'
         tags: [{ name: 'messenger.message_handler', bus: 'command.bus' }]
