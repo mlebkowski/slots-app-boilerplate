@@ -1,3 +1,7 @@
 kernel:
-    resource: ../../src/Infrastructure/Framework/Kernel.php
+    resource: ../../src/Enraged/Infrastructure/Framework/Kernel.php
+    type: annotation
+
+controllers:
+    resource: ../../src/Enraged/Interactions/Web/Controller/
     type: annotation

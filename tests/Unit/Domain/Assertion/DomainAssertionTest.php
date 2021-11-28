@@ -10,7 +10,7 @@ use Enraged\Tests\Unit\UnitTestCase;
 
 class DomainAssertionTest extends UnitTestCase
 {
-    public function test_throws_correct_exception() : void
+    public function test_throws_correct_exception()
     {
         $this->expectException(DomainInvalidAssertionException::class);
         DomainAssertion::notEmpty([]);

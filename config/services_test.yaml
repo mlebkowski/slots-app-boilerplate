@@ -1,0 +1,10 @@
+services:
+
+  Enraged\Tests\Context\:
+    resource: '../tests/Context/'
+
+  # INFRASTRUCTURE/HTTP
+  Enraged\Infrastructure\HTTP\Client\HttpClientInterface:
+    class: 'Enraged\Infrastructure\HTTP\Client\InMemoryHttpClient'
+    public: true
+    autowire: true

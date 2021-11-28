@@ -2,7 +2,6 @@
 <psalm
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         errorLevel="1"
-        resolveFromConfigFile="true"
         xmlns="https://getpsalm.org/schema/config"
         xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
 >
@@ -43,6 +42,19 @@
                 <directory name="config"/>
             </errorLevel>
         </InvalidArgument>
+        <MixedReturnTypeCoercion>
+            <errorLevel type="suppress">
+                <directory name="src/Enraged/Infrastructure/HTTP/DoctorsApi/Response"/>
+                <file name="src/Enraged/Infrastructure/HTTP/Client/InMemoryHttpClientResponse.php"/>
+            </errorLevel>
+        </MixedReturnTypeCoercion>
+        <MissingReturnType>
+            <errorLevel type="suppress">
+                <directory name="tests/Unit"/>
+                <directory name="tests/Integration"/>
+                <directory name="tests/Functional"/>
+            </errorLevel>
+        </MissingReturnType>
     </issueHandlers>
     <plugins>
         <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
