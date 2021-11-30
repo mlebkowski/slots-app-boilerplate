@@ -87,26 +87,26 @@ class Doctor
     }
 
     /**
-     * @param DoctorTimeSlot[] $availableTimeSlots
+     * @param DoctorTimeSlot[] $available_time_slots
      *
      * @throws DomainInvalidAssertionException
      */
     public function setAvailableTimeslots(
-        array $availableTimeSlots,
+        array $available_time_slots,
         NoPastTimeSlotsSpecification $no_past_time_slots_specification,
         NoOverlappingTimeSlotsSpecification $no_overlapping_time_slots_specification,
         TimeSlotDurationSpecification $time_slot_duration_specification,
         DateTimeInterface $updated_at
     ) : void {
         DomainAssertion::false($this->isDeleted(), 'Domain Object was deleted!');
-        DomainAssertion::allIsInstanceOf($availableTimeSlots, DoctorTimeSlot::class);
-        $futureTimeSlots = array_filter($availableTimeSlots, fn (DoctorTimeSlot $slot) => $no_past_time_slots_specification->isSatisfiedBy($slot));
-        $futureLongEnoughTimeSlots = array_filter($futureTimeSlots, fn (DoctorTimeSlot $slot) => $time_slot_duration_specification->isSatisfiedBy($slot));
+        DomainAssertion::allIsInstanceOf($available_time_slots, DoctorTimeSlot::class);
+        $future_time_slots = array_filter($available_time_slots, fn (DoctorTimeSlot $slot) => $no_past_time_slots_specification->isSatisfiedBy($slot));
+        $future_long_enough_time_slots = array_filter($future_time_slots, fn (DoctorTimeSlot $slot) => $time_slot_duration_specification->isSatisfiedBy($slot));
         DomainAssertion::true(
-            $no_overlapping_time_slots_specification->isSatisfiedBy($futureNonOverlappingLongEnoughTimeSlots = $futureLongEnoughTimeSlots),
+            $no_overlapping_time_slots_specification->isSatisfiedBy($future_non_overlapping_long_enough_time_slots = $future_long_enough_time_slots),
             $no_overlapping_time_slots_specification->error()
         );
-        $this->available_time_slots = $futureNonOverlappingLongEnoughTimeSlots;
+        $this->available_time_slots = $future_non_overlapping_long_enough_time_slots;
         $this->updated_at = $updated_at;
     }
 

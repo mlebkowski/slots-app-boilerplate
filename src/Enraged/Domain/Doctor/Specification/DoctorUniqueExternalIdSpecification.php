@@ -17,6 +17,9 @@ class DoctorUniqueExternalIdSpecification extends AbstractSpecification
         $this->doctors = $doctors;
     }
 
+    /**
+     * @param int $candidate
+     */
     public function assertions(mixed $candidate) : void
     {
         DomainAssertion::integer($candidate);
