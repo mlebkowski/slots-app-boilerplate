@@ -6,11 +6,11 @@ namespace Enraged\Infrastructure\HTTP\DoctorsApi\Response;
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Enraged\Application\Query\Doctor\ExternalDoctors\Model\ExternalDoctorTimeSlotModel;
 use Enraged\Infrastructure\Exception\InfrastructureHttpBadRequestException;
 use Enraged\Infrastructure\Exception\InfrastructureHttpBadResponseException;
 use Enraged\Infrastructure\Exception\InfrastructureHttpException;
 use Enraged\Infrastructure\HTTP\Client\HttpClientInterface;
-use Enraged\Infrastructure\HTTP\DoctorsApi\Model\DoctorTimeSlotModel;
 use Enraged\Infrastructure\HTTP\DoctorsApi\Request\ListDoctorsTimeSlotsRequest;
 use Iterator;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -34,19 +34,19 @@ class ListDoctorTimeSlotsResponse
     }
 
     /**
-     * @return Iterator<int, DoctorTimeSlotModel>
+     * @return Iterator<int, ExternalDoctorTimeSlotModel>
      *
      * @throws InfrastructureHttpException
      */
     public function iterator() : Iterator
     {
         foreach ($this->responseToArrayOfDoctorTimeSlots($this->makeRequest($this->request)) as $slot) {
-            yield new DoctorTimeSlotModel(
+            yield new ExternalDoctorTimeSlotModel(
                 $this->request->getDoctorId(),
-                ($start = DateTimeImmutable::createFromFormat(DateTimeInterface::ISO8601, $slot->start)) instanceof DateTimeInterface
+                ($start = DateTimeImmutable::createFromFormat(DateTimeInterface::ISO8601, $slot['start'])) instanceof DateTimeInterface
                     ? $start
                     : throw new InfrastructureHttpBadResponseException('Invalid date format in api response. Expected ISO8601.'),
-                ($end = DateTimeImmutable::createFromFormat(DateTimeInterface::ISO8601, $slot->end)) instanceof DateTimeInterface
+                ($end = DateTimeImmutable::createFromFormat(DateTimeInterface::ISO8601, $slot['end'])) instanceof DateTimeInterface
                     ? $end
                     : throw new InfrastructureHttpBadResponseException('Invalid date format in api response. Expected ISO8601.')
             );
@@ -54,7 +54,7 @@ class ListDoctorTimeSlotsResponse
     }
 
     /**
-     * @return object{start: string, end: string}[]
+     * @return array{start: string, end: string}[]
      *
      * @throws InfrastructureHttpException
      */

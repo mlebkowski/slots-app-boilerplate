@@ -1,6 +1,6 @@
 services:
     # INFRASTRUCTURE/HTTP
-    Enraged\Infrastructure\HTTP\Client\HttpClientInterface:
-        class: 'Enraged\Infrastructure\HTTP\Client\InMemoryHttpClient'
-        public: true
-        autowire: true
+#    Enraged\Infrastructure\HTTP\Client\HttpClientInterface:
+#        class: 'Enraged\Infrastructure\HTTP\Client\InMemoryHttpClient'
+#        public: true
+#        autowire: true

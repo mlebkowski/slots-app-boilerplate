@@ -1,11 +1,12 @@
 parameters:
-    level: 9
+    level: 8
     paths:
         - config
         - migrations
         - public
         - src
         - tests
+    checkGenericClassInNonGenericObjectType: false
     ignoreErrors:
         -
            message: '#Property [a-zA-Z\\_]+::\$[a-zA-Z\\_]+ type has no value type specified in iterable type array\.#'
@@ -22,13 +23,8 @@ parameters:
            message: '#Method [a-zA-Z\\_]+::[a-zA-Z_]+\(\) return type has no value type specified in iterable type array\.#'
            paths:
                - src/Enraged/Infrastructure/HTTP/Client/InMemoryHttpClientResponse.php
-               - src/Enraged/Infrastructure/HTTP/DoctorsApi/Response
         -
-           message: '#PHPDoc tag @return with type object is incompatible with native type array\.#'
-           paths:
-               - src/Enraged/Infrastructure/HTTP/DoctorsApi/Response
-        -
-           message: '#Method [a-zA-Z\\_]+::[a-zA-Z_]+\(\) has no return type specified\.#'
+           message: '#Method [a-zA-Z\\_]+::[\da-zA-Z_]+\(\) has no return type specified\.#'
            paths:
                - src/Enraged/Infrastructure/HTTP/Client/InMemoryHttpClient.php
                - tests/Unit

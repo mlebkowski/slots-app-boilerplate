@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Enraged\Infrastructure\HTTP\DoctorsApi\Request;
 
-use Enraged\Infrastructure\HTTP\DoctorsApi\Filter\ListDoctorTimeSlotsApiRequestFilter;
+use Enraged\Application\Query\Doctor\ExternalDoctors\ListExternalDoctorTimeSlotsQuery;
 use Symfony\Component\HttpFoundation\Response;
 
 class ListDoctorsTimeSlotsRequest extends AbstractDoctorsApiRequest implements DoctorsApiRequestInterface
 {
     protected int $doctor_id;
-    protected ListDoctorTimeSlotsApiRequestFilter $filter;
+    protected ListExternalDoctorTimeSlotsQuery $query;
 
-    public function __construct(ListDoctorTimeSlotsApiRequestFilter $filter, int $doctorId, string $host, string $username, string $password)
+    public function __construct(ListExternalDoctorTimeSlotsQuery $query, string $host, string $username, string $password)
     {
         parent::__construct($host, $username, $password);
-        $this->doctor_id = $doctorId;
-        $this->filter = $filter;
+        $this->doctor_id = $query->getDoctorId();
+        $this->query = $query;
     }
 
     public function method() : string

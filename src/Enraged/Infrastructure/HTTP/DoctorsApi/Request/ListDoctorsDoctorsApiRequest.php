@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Enraged\Infrastructure\HTTP\DoctorsApi\Request;
 
-use Enraged\Infrastructure\HTTP\DoctorsApi\Filter\ListDoctorsApiRequestFilter;
+use Enraged\Application\Query\Doctor\ExternalDoctors\ListExternalDoctorsQuery;
 use Symfony\Component\HttpFoundation\Response;
 
 class ListDoctorsDoctorsApiRequest extends AbstractDoctorsApiRequest implements DoctorsApiRequestInterface
 {
-    protected ListDoctorsApiRequestFilter $filter;
+    protected ListExternalDoctorsQuery $query;
 
-    public function __construct(ListDoctorsApiRequestFilter $filter, string $host, string $username, string $password)
+    public function __construct(ListExternalDoctorsQuery $query, string $host, string $username, string $password)
     {
         parent::__construct($host, $username, $password);
-        $this->filter = $filter;
+        $this->query = $query;
     }
 
     public function method() : string

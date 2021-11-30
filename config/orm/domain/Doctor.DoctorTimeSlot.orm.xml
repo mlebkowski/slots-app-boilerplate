@@ -1,0 +1,13 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <entity name="Enraged\Domain\Doctor\DoctorTimeSlot" table="enraged_domain_doctor_time_slot">
+        <id name="id" type="ulid" column="id">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="doctor_id" type="ulid"/>
+        <field name="start_at" type="datetime_immutable"/>
+        <field name="end_at" type="datetime_immutable"/>
+        <field name="created_at" type="datetime_immutable"/>
+        <field name="updated_at" type="datetime_immutable" nullable="true"/>
+        <field name="deleted_at" type="datetime_immutable" nullable="true"/>
+    </entity>
+</doctrine-mapping>

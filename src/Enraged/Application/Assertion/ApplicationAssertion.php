@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Enraged\Application\Assertion;
 
-use Assert\Assertion;
 use Enraged\Application\Exception\ApplicationInvalidAssertionException;
+use Enraged\Values\Assertion;
 
 class ApplicationAssertion extends Assertion
 {

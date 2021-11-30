@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Enraged\Infrastructure\Assertion;
 
-use Assert\Assertion;
 use Enraged\Infrastructure\Exception\InfrastructureInvalidAssertionException;
+use Enraged\Values\Assertion;
 
 class InfrastructureAssertion extends Assertion
 {

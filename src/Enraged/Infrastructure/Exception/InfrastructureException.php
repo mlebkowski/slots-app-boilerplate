@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Enraged\Infrastructure\Exception;
 
-use Exception;
+use RuntimeException;
 
-class InfrastructureException extends Exception
+class InfrastructureException extends RuntimeException
 {
 }

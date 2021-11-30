@@ -37,15 +37,16 @@ trait MakeRequestTrait
                     ],
                 ]
             );
-            InfrastructureAssertion::eq($request->expectCode(), $response->getStatusCode());
-            InfrastructureAssertion::keyIsset($response->getHeaders(false), 'Content-Type');
-            InfrastructureAssertion::eq($request->accept(), $response->getHeaders(false)['Content-Type'][0]);
+            InfrastructureAssertion::eq($response->getStatusCode(), $request->expectCode());
+            !isset($response->getHeaders(false)['Content-Type']) || InfrastructureAssertion::eq($response->getHeaders(false)['Content-Type'][0], $request->accept());
 
             return $response;
         } catch (ClientExceptionInterface $exception) {
             throw new InfrastructureHttpBadRequestException($exception->getMessage(), intval($exception->getCode()), $exception);
-        } catch (InfrastructureInvalidAssertionException|TransportExceptionInterface|RedirectionExceptionInterface|ServerExceptionInterface $exception) {
+        } catch (TransportExceptionInterface|RedirectionExceptionInterface|ServerExceptionInterface $exception) {
             throw new InfrastructureHttpBadResponseException($exception->getMessage(), intval($exception->getCode()), $exception);
+        } catch (InfrastructureInvalidAssertionException $exception) {
+            throw new InfrastructureHttpBadResponseException(sprintf('%s %s: Bad API response: %s', $request->method(), $request->host() . '/' . $request->path(), $exception->getMessage()), intval($exception->getCode()), $exception);
         }
     }
 }

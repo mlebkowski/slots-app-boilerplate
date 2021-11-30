@@ -4,32 +4,31 @@ declare(strict_types=1);
 
 namespace Enraged\Tests\Context\Project\Infrastructure;
 
+use Enraged\Infrastructure\BUS\CommandBus;
+use Enraged\Infrastructure\BUS\EventBus;
+use Enraged\Infrastructure\BUS\QueryBus;
 use InvalidArgumentException;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 trait BusContextTrait
 {
-    public function commandBus() : MessageBusInterface
+    public function commandBus() : CommandBus
     {
-        if (($bus = $this->getContainer()->get('command.bus')) instanceof MessageBusInterface) {
-            return $bus;
-        }
-        throw new InvalidArgumentException('Bus instance is not implementing expected interface');
+        return ($bus = $this->getContainer()->get(CommandBus::class)) instanceof CommandBus
+            ? $bus
+            : throw new InvalidArgumentException('Not a CommandBus instance.');
     }
 
-    public function queryBus() : MessageBusInterface
+    public function queryBus() : QueryBus
     {
-        if (($bus = $this->getContainer()->get('query.bus')) instanceof MessageBusInterface) {
-            return $bus;
-        }
-        throw new InvalidArgumentException('Bus instance is not implementing expected interface');
+        return ($bus = $this->getContainer()->get(QueryBus::class)) instanceof QueryBus
+            ? $bus
+            : throw new InvalidArgumentException('Not a CommandBus instance.');
     }
 
-    public function eventBus() : MessageBusInterface
+    public function eventBus() : EventBus
     {
-        if (($bus = $this->getContainer()->get('event.bus')) instanceof MessageBusInterface) {
-            return $bus;
-        }
-        throw new InvalidArgumentException('Bus instance is not implementing expected interface');
+        return ($bus = $this->getContainer()->get(EventBus::class)) instanceof EventBus
+            ? $bus
+            : throw new InvalidArgumentException('Not a CommandBus instance.');
     }
 }

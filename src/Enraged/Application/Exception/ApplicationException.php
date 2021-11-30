@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Enraged\Application\Exception;
 
-use Exception;
+use LogicException;
 
-class ApplicationException extends Exception
+class ApplicationException extends LogicException
 {
 }

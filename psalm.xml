@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <psalm
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        errorLevel="1"
         xmlns="https://getpsalm.org/schema/config"
         xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+        errorLevel="3"
 >
     <projectFiles>
         <directory name="config"/>
@@ -16,39 +16,20 @@
         </ignoreFiles>
     </projectFiles>
     <issueHandlers>
-        <MixedAssignment>
-            <errorLevel type="suppress">
-                <directory name="config"/>
-                <file name="public/index.php"/>
-            </errorLevel>
-        </MixedAssignment>
-        <MixedArgument>
-            <errorLevel type="suppress">
-                <file name="public/index.php"/>
-            </errorLevel>
-        </MixedArgument>
         <MissingFile>
             <errorLevel type="suppress">
                 <directory name="config"/>
             </errorLevel>
         </MissingFile>
-        <MixedArgumentTypeCoercion>
+        <MoreSpecificImplementedParamType>
             <errorLevel type="suppress">
-                <directory name="config"/>
+                <directory name="src/Enraged/Domain/Doctor/Specification"/>
             </errorLevel>
-        </MixedArgumentTypeCoercion>
-        <InvalidArgument>
-            <errorLevel type="suppress">
-                <directory name="config"/>
-            </errorLevel>
-        </InvalidArgument>
-        <MixedReturnTypeCoercion>
-            <errorLevel type="suppress">
-                <directory name="src/Enraged/Infrastructure/HTTP/DoctorsApi/Response"/>
-                <file name="src/Enraged/Infrastructure/HTTP/Client/InMemoryHttpClientResponse.php"/>
-            </errorLevel>
-        </MixedReturnTypeCoercion>
+        </MoreSpecificImplementedParamType>
         <MissingReturnType>
+            <errorLevel type="error">
+                <directory name="src"/>
+            </errorLevel>
             <errorLevel type="suppress">
                 <directory name="tests/Unit"/>
                 <directory name="tests/Integration"/>

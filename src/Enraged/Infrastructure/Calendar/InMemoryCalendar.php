@@ -15,6 +15,15 @@ final class InMemoryCalendar implements InMemoryCalendarInterface
     private ?DateInterval $subOffset = null;
     private ?DateInterval $addOffset = null;
 
+    public function __construct()
+    {
+        InfrastructureAssertion::eq(
+            date_default_timezone_get(),
+            'UTC',
+            'System timezone other than UTC.'
+        );
+    }
+
     public function now() : DateTimeInterface
     {
         $now = new DateTimeImmutable();

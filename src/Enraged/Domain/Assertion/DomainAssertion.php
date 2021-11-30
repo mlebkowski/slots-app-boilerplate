@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Enraged\Domain\Assertion;
 
-use Assert\Assertion;
 use Enraged\Domain\Exception\DomainInvalidAssertionException;
+use Enraged\Values\Assertion;
 
 class DomainAssertion extends Assertion
 {

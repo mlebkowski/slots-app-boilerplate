@@ -108,6 +108,36 @@
         "cache:clear:prod": [
             "bin/console cache:clear --env=prod"
         ],
+        "database:create:dev": [
+            "bin/console doctrine:database:create -n --env=dev"
+        ],
+        "database:create:test": [
+            "bin/console doctrine:database:create -n --env=test"
+        ],
+        "database:create:prod": [
+            "bin/console doctrine:database:create -n --env=prod"
+        ],
+        "database:drop:dev": [
+            "bin/console doctrine:database:drop --if-exists --force -n --env=dev"
+        ],
+        "database:drop:test": [
+            "bin/console doctrine:database:drop --if-exists --force -n --env=test"
+        ],
+        "database:diff:dev": [
+            "bin/console doctrine:migrations:diff -n --env=dev"
+        ],
+        "database:migration:dev": [
+            "bin/console doctrine:migrations:generate -n --env=dev"
+        ],
+        "database:migrate:dev": [
+            "bin/console doctrine:migrations:migrate -n --env=dev"
+        ],
+        "database:migrate:test": [
+            "bin/console doctrine:migrations:migrate -n --env=test"
+        ],
+        "database:migrate:prod": [
+            "bin/console doctrine:migrations:migrate -n --env=prod"
+        ],
         "quality:check": [
             "@quality:cs:check",
             "@quality:stan:check",

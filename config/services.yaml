@@ -10,11 +10,27 @@ services:
         autowire: true
         autoconfigure: true
 
+    _instanceof:
+        Enraged\Domain\SpecificationInterface:
+            tags: [ 'enraged.domain.specification' ]
+
     Enraged\:
         resource: '../src/Enraged/'
         exclude:
             - '../src/Enraged/Domain/'
             - '../src/Enraged/Infrastructure/Framework/Kernel.php'
+
+    # APPLICATION/QUERY/DOCTORS/EXTERNAL-DOCTORS
+    Enraged\Application\Query\Doctor\ExternalDoctors\ExternalDoctorsQueryInterface:
+        class: 'Enraged\Infrastructure\HTTP\DoctorsApi\ExternalDoctorsApiClient'
+        arguments:
+            $api_host: '%env(DOCTORS_API_HOST)%'
+            $username: '%env(DOCTORS_API_USERNAME)%'
+            $password: '%env(DOCTORS_API_PASSWORD)%'
+
+    # DOMAIN => ORM
+    Enraged\Domain\Doctor\DoctorInterface:
+        alias: 'Enraged\Infrastructure\ORM\DoctorOrm'
 
     # INTERACTIONS/WEB
     Enraged\Interactions\Web\Controller\:
@@ -45,5 +61,4 @@ services:
         public: true
         arguments:
             - '@Symfony\Component\HttpClient\TraceableHttpClient'
-
 

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Enraged\Infrastructure\HTTP\DoctorsApi\Response;
 
+use Enraged\Application\Query\Doctor\ExternalDoctors\Model\ExternalDoctorModel;
 use Enraged\Infrastructure\Exception\InfrastructureHttpBadRequestException;
 use Enraged\Infrastructure\Exception\InfrastructureHttpException;
 use Enraged\Infrastructure\HTTP\Client\HttpClientInterface;
-use Enraged\Infrastructure\HTTP\DoctorsApi\Model\DoctorModel;
 use Enraged\Infrastructure\HTTP\DoctorsApi\Request\ListDoctorsDoctorsApiRequest;
 use Iterator;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -31,22 +31,22 @@ class ListDoctorsResponse
     }
 
     /**
-     * @return Iterator<int, DoctorModel>
+     * @return Iterator<int, ExternalDoctorModel>
      *
      * @throws InfrastructureHttpException
      */
     public function iterator() : Iterator
     {
         foreach ($this->responseToArrayOfDoctors($this->makeRequest($this->request)) as $doctor) {
-            yield ($id = intval($doctor->id)) => new DoctorModel(
+            yield ($id = intval($doctor['id'])) => new ExternalDoctorModel(
                 $id,
-                $doctor->name
+                $doctor['name']
             );
         }
     }
 
     /**
-     * @return object{name: string, id: int}[]
+     * @return array{name: string, id: int}[]
      *
      * @throws InfrastructureHttpException
      */

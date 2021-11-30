@@ -14,4 +14,8 @@ RUN docker-php-ext-install zip \
 
 WORKDIR /app
 
+# TODO composer install/dumping autoload should be part of container building
+# TODO paralel downloads in composer as a plugin are still a thing, or composer taken care of it?
+# TODO extract database, webserver to separate containers
+# TODO check which process keeps this container alive
 CMD bash -c "composer install && symfony server:start --port=3160"
