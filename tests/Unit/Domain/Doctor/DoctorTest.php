@@ -102,4 +102,74 @@ class DoctorTest extends TestCase
         $this->assertEquals($slots, $no_overlapping_time_slots_specification->lastCandidate());
         $this->assertEquals($slot, $time_slot_duration_specification->lastCandidate());
     }
+
+    public function test_too_short_and_past_time_slots_are_skipped_when_setting_available()
+    {
+        $now = new DateTimeImmutable();
+        $doctor = new Doctor(
+            new Ulid(new CalendarStub()),
+            1,
+            'Doctor Who',
+            $now,
+            new DoctorUniqueExternalIdSpecification(new InMemoryDoctorOrm()),
+            new DoctorNameSpecification()
+        );
+        $doctor->setAvailableTimeslots(
+            $slots = [
+                $valid_slot = DoctorTimeSlotMother::createDoctorTimeSlot(
+                    $doctor->getId(),
+                    $now->add(new DateInterval('PT1H')),
+                    $now->add(new DateInterval('PT2H')),
+                ),
+                $too_short_slot = DoctorTimeSlotMother::createDoctorTimeSlot(
+                    $doctor->getId(),
+                    $now->add(new DateInterval('PT1H')),
+                    $now->add(new DateInterval('PT1H15M')),
+                ),
+                $past_slot = DoctorTimeSlotMother::createDoctorTimeSlot(
+                    $doctor->getId(),
+                    $now->sub(new DateInterval('PT1H')),
+                    $now->sub(new DateInterval('PT1H15M')),
+                ),
+            ],
+            $no_past_slots_specification = new NoPastTimeSlotsSpecification($now),
+            $no_overlapping_time_slots_specification = new NoOverlappingTimeSlotsSpecification(),
+            $time_slot_duration_specification = new TimeSlotDurationSpecification(),
+            new DateTimeImmutable()
+        );
+        $this->assertCount(1, $doctor->getAvailableTimeSlots());
+        $this->assertSame($valid_slot, $doctor->getAvailableTimeSlots()[0]);
+    }
+
+    public function test_cannot_set_overlapping_slots()
+    {
+        $this->expectExceptionObject(new DomainInvalidAssertionException('There are overlapping timeslots!', 32));
+        $now = new DateTimeImmutable();
+        $doctor = new Doctor(
+            new Ulid(new CalendarStub()),
+            1,
+            'Doctor Who',
+            $now,
+            new DoctorUniqueExternalIdSpecification(new InMemoryDoctorOrm()),
+            new DoctorNameSpecification()
+        );
+        $doctor->setAvailableTimeslots(
+            [
+                DoctorTimeSlotMother::createDoctorTimeSlot(
+                    $doctor->getId(),
+                    $now->add(new DateInterval('PT1H')),
+                    $now->add(new DateInterval('PT2H')),
+                ),
+                DoctorTimeSlotMother::createDoctorTimeSlot(
+                    $doctor->getId(),
+                    $now->add(new DateInterval('PT1H30M')),
+                    $now->add(new DateInterval('PT2H30M')),
+                ),
+            ],
+            new NoPastTimeSlotsSpecification($now),
+            new NoOverlappingTimeSlotsSpecification(),
+            new TimeSlotDurationSpecification(),
+            new DateTimeImmutable()
+        );
+    }
 }

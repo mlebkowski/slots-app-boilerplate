@@ -10,10 +10,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    _instanceof:
-        Enraged\Domain\SpecificationInterface:
-            tags: [ 'enraged.domain.specification' ]
-
     Enraged\:
         resource: '../src/Enraged/'
         exclude:
