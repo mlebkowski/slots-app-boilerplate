@@ -28,10 +28,10 @@ final class InMemoryCalendar implements InMemoryCalendarInterface
     {
         $now = new DateTimeImmutable();
         if ($this->addOffset) {
-            $now = $now->add($this->addOffset);
+            return $now->add($this->addOffset);
         }
         if ($this->subOffset) {
-            $now = $now->sub($this->subOffset);
+            return $now->sub($this->subOffset);
         }
 
         return $now;
