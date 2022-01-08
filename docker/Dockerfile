@@ -11,7 +11,7 @@ RUN docker-php-ext-install zip \
 && docker-php-ext-configure intl \
 && docker-php-ext-install intl \
 && docker-php-ext-install opcache
-
+RUN sudo apt-get install graphviz
 WORKDIR /app
 
 # TODO composer install/dumping autoload should be part of container building

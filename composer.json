@@ -12,6 +12,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
         "phpdocumentor/reflection-docblock": "^5.2",
+        "qossmic/deptrac-shim": "^0.18.0",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "^5.3",
         "symfony/console": "^5.3",
@@ -141,7 +142,8 @@
         "quality:check": [
             "@quality:cs:check",
             "@quality:stan:check",
-            "@quality:psalm:check"
+            "@quality:psalm:check",
+            "@quality:deptrac:check"
         ],
         "quality:fix": [
             "@quality:cs:fix"
@@ -157,6 +159,9 @@
         ],
         "quality:psalm:check": [
             "vendor/bin/psalm --no-cache"
+        ],
+        "quality:deptrac:check": [
+            "vendor/bin/deptrac analyse"
         ],
         "test": [
             "@quality:check",

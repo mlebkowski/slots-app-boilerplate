@@ -1,0 +1,48 @@
+paths:
+    - ./src
+exclude_files:
+    - '#.*test.*#'
+layers:
+    -
+        name: Interactions
+        collectors:
+            -
+                type: directory
+                regex: src/Enraged/Interactions/.*
+    -
+        name: Application
+        collectors:
+            -
+              type: directory
+              regex: src/Enraged/Application/.*
+    -
+        name: Infrastructure
+        collectors:
+            -
+                type: directory
+                regex: src/Enraged/Infrastructure/.*
+    -
+        name: Values
+        collectors:
+            -
+                type: directory
+                regex: src/Enraged/Values/.*
+    -
+        name: Domain
+        collectors:
+            -
+                type: directory
+                regex: src/Enraged/Domain/.*
+ruleset:
+    Interactions:
+        - Application
+        - Values
+    Application:
+        - Infrastructure
+        - Domain
+        - Values
+    Domain:
+        - Values
+    Infrastructure:
+        - Values
+    Values:
